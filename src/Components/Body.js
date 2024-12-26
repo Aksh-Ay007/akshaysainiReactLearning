@@ -3,6 +3,7 @@ import "./index.css";
 import Shimmer from "./Shimmer";
 import Rescard from "./Rescard";
 import { Link } from "react-router-dom";
+import useOnlineStatus from './utils/useOnlineStatus'
 
 function Body() {
   const [restaurants, setRestaurants] = useState([]);
@@ -40,6 +41,12 @@ function Body() {
       console.error("Error fetching restaurant data:", error);
     }
   };
+
+  const onlineStatus=useOnlineStatus()
+
+  if(onlineStatus===false)return(<div>
+    <h1>please check your internet buddy...😉😒</h1>
+  </div>)
 
   return restaurants.length === 0 ? (
     <Shimmer />

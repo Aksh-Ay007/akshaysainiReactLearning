@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './index.css';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import useOnlineStatus from './utils/useOnlineStatus'
 
 function Header() {
 
     // let auth='login'
+
+    const onlineStatus=useOnlineStatus()
 
     let[autho,setAutho]=useState('login')
     return (
@@ -22,6 +25,8 @@ function Header() {
                     <li><Link to='/about'>About</Link></li>
                     <li><Link to='/contact'>Contact us</Link></li>
                     <li><Link to='/cart'>Cart</Link></li>
+                    <li>OnlineStatus:{onlineStatus?'✅':'❌'}</li>
+
                  
                     <li onClick={()=>{autho==='login'?setAutho('logout'):setAutho('login')}}>{autho}</li>
                 </ul>
